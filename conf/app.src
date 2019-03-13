@@ -1,7 +1,7 @@
-SOURCE_URL=https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-prod-community.tar.gz
-SOURCE_SUM=56dffc972cd274578a9b57290351f81a212e2f19231ea7de371aebe8aecdc28b95dc48d3cd6885c7fe6385bb8b3f93836e7ce7bb494366adc96c09409e20a072
+SOURCE_URL=https://www.redmine.org/releases/redmine-4.0.2.tar.gz
+SOURCE_SUM=7adf6d2563edb550e5ae3fd93872f7825b34fe0aeb0b9e1778a157fa56f8366324302c89ffabb9af5d1f336a5a70a20e27a0c54c727d6b4e6ba3e1c7cc575214
 SOURCE_SUM_PRG=sha512sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
 SOURCE_EXTRACT=true
-SOURCE_FILENAME=pia-front.tar.gz
+SOURCE_FILENAME=redmine.tar.gz
