@@ -1,7 +1,7 @@
 production:
   adapter:  postgresql
   host:     localhost
-  encoding: unicode
+  encoding: utf8
   database: yunobase
   pool:     5
   username: yunouser

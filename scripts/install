@@ -47,7 +47,7 @@ app=$YNH_APP_INSTANCE_NAME
 
 ### If the app uses nginx as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
 ### If the app provides an internal web server (or uses another application server such as uwsgi), the final path should be "/opt/yunohost/$app"
-final_path=/var/www/$app
+final_path=/opt/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
 # Normalize the url path syntax
@@ -144,14 +144,12 @@ ynh_setup_source "$final_path"
 #=================================================
 ynh_print_info "Install Redmine Conffiguration..."
 
-rm /opt/pia-back/config/database.example.yml
-cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
-cp -a ../conf/pias_controller.rb /opt/pia-back/app/controllers/pias_controller.rb
+cp -a ../conf/database.example.yml $final_path/config/database.yml
 
-ynh_replace_string "2.5.3"      "2.3.3"       "/opt/pia-back/Gemfile"
-ynh_replace_string "yunouser"   "$db_name"    "/opt/pia-back/config/database.yml"
-ynh_replace_string "yunopass"   "$db_pwd"     "/opt/pia-back/config/database.yml"
-ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml"
+#ynh_replace_string "2.5.3"      "2.3.3"       "/opt/redmine/Gemfile"
+ynh_replace_string "yunouser"   "$db_name"    "$final_path/config/database.yml"
+ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/config/database.yml"
+ynh_replace_string "yunobase"   "$db_name"    "$final_path/config/database.yml"
 
 #=================================================
 # COMPILE PIA BACK

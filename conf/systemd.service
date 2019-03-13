@@ -1,5 +1,5 @@
 [Unit]
-Description=Pia Backend
+Description=Redmine
 Requires=network.target
 Requires=postgresql.service
 
@@ -7,9 +7,9 @@ Requires=postgresql.service
 Type=simple
 User=root
 Group=users
-WorkingDirectory=/opt/pia-back
+WorkingDirectory=/opt/redmine
 Environment=RAILS_SERVE_STATIC_FILES=true
-ExecStart=/bin/bash -c "/opt/pia-back/bin/rails s -e production -b 127.0.0.1 -p 3000"
+ExecStart=/bin/bash -c "/opt/redmine/bin/rails s -e production -b 127.0.0.1 -p 3000"
 TimeoutSec=30
 RestartSec=15s
 Restart=always
