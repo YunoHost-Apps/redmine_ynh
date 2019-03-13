@@ -137,7 +137,7 @@ ynh_print_info "Installing Redmine..."
 
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path" "$app"
+ynh_setup_source "$final_path"
 
 #=================================================
 # MODIFY A CONFIG FILE
@@ -156,9 +156,9 @@ ynh_replace_string "yunobase"   "$db_name"    "/opt/pia-back/config/database.yml
 #=================================================
 # COMPILE PIA BACK
 #=================================================
-ynh_print_info "Compile PIA Back End..."
+ynh_print_info "Compile Redmine..."
 
-pushd /opt/pia-back/
+pushd $final_path
 bundle install
 mv config/application.example.yml config/application.yml
 key=$(RAILS_ENV=production bin/rake secret)
@@ -166,15 +166,6 @@ ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/applicatio
 #RAILS_ENV=production bin/rake db:create
 RAILS_ENV=production bin/rake db:migrate
 popd
-
-#=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
-ynh_print_info "Installing PIA Front End..."
-
-ynh_app_setting_set $app final_path $final_path
-# Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path" "front"
 
 #=================================================
 # SETUP SYSTEMD
