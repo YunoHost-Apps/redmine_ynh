@@ -157,7 +157,7 @@ ynh_replace_string "yunobase"   "$db_name"    "$final_path/config/database.yml"
 ynh_print_info "Compile Redmine..."
 
 pushd $final_path
-bundle install
+bundle install --without development test rmagick
 mv config/application.example.yml config/application.yml
 key=$(RAILS_ENV=production bin/rake secret)
 ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/application.yml"
