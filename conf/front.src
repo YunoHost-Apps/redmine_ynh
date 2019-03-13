@@ -1,0 +1,7 @@
+SOURCE_URL=https://github.com/YunoHost-Apps/pia_ynh/releases/download/2.0.0/pia-prod-community.tar.gz
+SOURCE_SUM=56dffc972cd274578a9b57290351f81a212e2f19231ea7de371aebe8aecdc28b95dc48d3cd6885c7fe6385bb8b3f93836e7ce7bb494366adc96c09409e20a072
+SOURCE_SUM_PRG=sha512sum
+SOURCE_FORMAT=tar.gz
+SOURCE_IN_SUBDIR=true
+SOURCE_EXTRACT=true
+SOURCE_FILENAME=pia-front.tar.gz

@@ -1,0 +1,83 @@
+#!/bin/bash
+
+# Exit on command errors and treat unset variables as an error
+set -eu
+
+# See comments in install script
+app=$YNH_APP_INSTANCE_NAME
+final_path=/opt/yunohost/$app
+back_path=/opt/pia-back
+
+# Source YunoHost helpers
+source /usr/share/yunohost/helpers
+
+# Stop pia service
+systemctl stop $app
+
+#=================================================
+# SAVE CONFIGRATION
+#=================================================
+ynh_print_info "Save PIA Back Conf..."
+
+cp -a /opt/pia-back/config/application.yml /opt/pia-back/config/application.yml.save
+cp -a /opt/pia-back/config/database.yml /opt/pia-back/config/database.yml.save
+cp -a /opt/pia-back/app/controllers/pias_controller.rb /opt/pia-back/app/controllers/pias_controller.rb.save
+cp -a /opt/pia-back/Gemfile /opt/pia-back/Gemfile.save
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_print_info "Installing PIA Back End..."
+
+ynh_app_setting_set $app final_path $final_path
+# Download, check integrity, uncompress and patch the source from app.src
+ynh_setup_source "$back_path" "back"
+
+#==============================================
+# UPGRADE DB
+#==============================================
+
+pushd /opt/pia-back/
+bundle install
+mv -f /opt/pia-back/config/application.yml.save /opt/pia-back/config/application.yml
+mv -f /opt/pia-back/config/database.yml.save /opt/pia-back/config/database.yml
+mv -f /opt/pia-back/app/controllers/pias_controller.rb.save /opt/pia-back/app/controllers/pias_controller.rb
+mv -f /opt/pia-back/Gemfile.save /opt/pia-back/Gemfile
+RAILS_ENV=production bin/rake db:migrate
+popd
+
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_print_info "Installing PIA Front End..."
+
+ynh_app_setting_set $app final_path $final_path
+# Download, check integrity, uncompress and patch the source from app.src
+ynh_setup_source "$final_path" "front"
+
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+
+# Create a dedicated nginx config
+#ynh_add_nginx_config
+
+
+#=================================================
+# UPGRADE CONFIG
+#=================================================
+#cp -a ../conf/loolwsd.xml /etc/loolwsd
+#ynh_replace_string "__NEXTCLOUDDOMAIN__" "$nextcloud_domain" "/etc/loolwsd/loolwsd.xml"
+#ynh_replace_string "__PASSWORD__" "$password" "/etc/loolwsd/loolwsd.xml"
+#systemctl restart loolwsd
+
+
+
+# If app is public, add url to SSOWat conf as skipped_uris
+#if [[ $is_public -eq 1 ]]; then
+  # See install script
+#  ynh_app_setting_set "$app" unprotected_uris "/"
+#fi
+
+# Start pia service
+systemctl start $app
