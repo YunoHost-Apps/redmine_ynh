@@ -50,9 +50,6 @@ app=$YNH_APP_INSTANCE_NAME
 final_path=/var/www/$app
 test ! -e "$final_path" || ynh_die "This path already contains a folder"
 
-back_path=/opt/pia-back
-test ! -e "$back_path" || ynh_die "This path already contains a folder"
-
 # Normalize the url path syntax
 path_url=$(ynh_normalize_url_path $path_url)
 
@@ -102,8 +99,7 @@ ynh_install_app_dependencies postgresql ruby-dev zlib1g-dev libpq-dev
 
 ynh_print_info "Installing Rails & Bunlder..."
 
-gem install rails:5.0.6 bundler:2.0.1
-#gem install rails bundler
+gem install rails:5.2.2 bundler:2.0.1
 
 #=================================================
 # CREATE A POSTGRESQL DATABASE
@@ -137,16 +133,16 @@ ynh_system_user_create $app
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_print_info "Installing PIA Back End..."
+ynh_print_info "Installing Redmine..."
 
 ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$back_path" "back"
+ynh_setup_source "$final_path" "$app"
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
-ynh_print_info "Install PIA Back End Conffiguration..."
+ynh_print_info "Install Redmine Conffiguration..."
 
 rm /opt/pia-back/config/database.example.yml
 cp -a ../conf/database.example.yml /opt/pia-back/config/database.yml
