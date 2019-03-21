@@ -160,7 +160,7 @@ pushd $final_path
 bundle install --without development test rmagick
 mv config/application.example.yml config/application.yml
 key=$(RAILS_ENV=production bin/rake secret)
-ynh_replace_string "__SECRET_KEY_HERE__" "$key" "/opt/pia-back/config/application.yml"
+ynh_replace_string "__SECRET_KEY_HERE__" "$key" "$final_path/config/application.yml"
 #RAILS_ENV=production bin/rake db:create
 RAILS_ENV=production bin/rake db:migrate
 popd
