@@ -1,7 +1,5 @@
 # Redmine app for YunoHost
 
-# NOT WORK IS IN DEV
-
 - [Yunohost project](https://yunohost.org)
 - [Redmine website](https://www.redmine.org/)
 
