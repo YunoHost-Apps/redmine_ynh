@@ -6,9 +6,9 @@
         "en": "Redmine package for YunoHost.",
         "fr": "Redmine pour YunoHost."
     },
-    "version": "4.0",
+    "version": "4.0.2",
     "url": "https://www.redmine.org/",
-    "license": "free",
+    "license": "GPL-2.0",
     "maintainer": {
         "name": "liberodark",
         "email": "liberodark@gmail.com"
