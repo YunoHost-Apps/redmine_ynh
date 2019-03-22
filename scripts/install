@@ -158,9 +158,7 @@ ynh_print_info "Compile Redmine..."
 
 pushd $final_path
 bundle install --without development test rmagick
-key=$(RAILS_ENV=production bin/rake secret)
 RAILS_ENV=production bin/rake generate_secret_token
-#ynh_replace_string "__SECRET_KEY_HERE__" "$key" "$final_path/config/application.yml"
 RAILS_ENV=production bin/rake db:migrate
 popd
 
