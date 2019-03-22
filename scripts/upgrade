@@ -1,83 +1,181 @@
 #!/bin/bash
 
-# Exit on command errors and treat unset variables as an error
-set -eu
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# See comments in install script
-app=$YNH_APP_INSTANCE_NAME
-final_path=/opt/yunohost/$app
-back_path=/opt/pia-back
-
-# Source YunoHost helpers
+source _common.sh
 source /usr/share/yunohost/helpers
 
-# Stop pia service
-systemctl stop $app
+#=================================================
+# LOAD SETTINGS
+#=================================================
+ynh_print_info "Loading installation settings..."
+
+app=$YNH_APP_INSTANCE_NAME
+
+
+domain=$(ynh_app_setting_get $app domain)
+path_url=$(ynh_app_setting_get $app path)
+admin=$(ynh_app_setting_get $app admin)
+is_public=$(ynh_app_setting_get $app is_public)
+final_path=$(ynh_app_setting_get $app final_path)
 
 #=================================================
-# SAVE CONFIGRATION
+# ENSURE DOWNWARD COMPATIBILITY
 #=================================================
-ynh_print_info "Save PIA Back Conf..."
+ynh_print_info "Ensuring downward compatibility..."
 
-cp -a /opt/pia-back/config/application.yml /opt/pia-back/config/application.yml.save
-cp -a /opt/pia-back/config/database.yml /opt/pia-back/config/database.yml.save
-cp -a /opt/pia-back/app/controllers/pias_controller.rb /opt/pia-back/app/controllers/pias_controller.rb.save
-cp -a /opt/pia-back/Gemfile /opt/pia-back/Gemfile.save
+# Fix is_public as a boolean value
+if [ "$is_public" = "Yes" ]; then
+	ynh_app_setting_set $app is_public 1
+	is_public=1
+elif [ "$is_public" = "No" ]; then
+	ynh_app_setting_set $app is_public 0
+	is_public=0
+fi
 
+# If final_path doesn't exist, create it
+if [ -z $final_path ]; then
+	final_path=/opt/$app
+	ynh_app_setting_set $app final_path $final_path
+fi
+
+#=================================================
+# BACKUP BEFORE UPGRADE THEN ACTIVE TRAP
+#=================================================
+ynh_print_info "Backing up the app before upgrading (may take a while)..."
+
+# Backup the current version of the app
+ynh_backup_before_upgrade
+ynh_clean_setup () {
+	# restore it if the upgrade fails
+	ynh_restore_upgradebackup
+}
+# Exit if an error occurs during the execution of the script
+ynh_abort_if_errors
+
+#=================================================
+# CHECK THE PATH
+#=================================================
+
+# Normalize the URL path syntax
+path_url=$(ynh_normalize_url_path $path_url)
+
+#=================================================
+# STANDARD UPGRADE STEPS
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_print_info "Installing PIA Back End..."
+ynh_print_info "Upgrading source files..."
 
-ynh_app_setting_set $app final_path $final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$back_path" "back"
+ynh_setup_source "$final_path"
 
-#==============================================
-# UPGRADE DB
-#==============================================
+#=================================================
+# COMPILE REDMINE
+#=================================================
+ynh_print_info "Compile Redmine..."
 
-pushd /opt/pia-back/
-bundle install
-mv -f /opt/pia-back/config/application.yml.save /opt/pia-back/config/application.yml
-mv -f /opt/pia-back/config/database.yml.save /opt/pia-back/config/database.yml
-mv -f /opt/pia-back/app/controllers/pias_controller.rb.save /opt/pia-back/app/controllers/pias_controller.rb
-mv -f /opt/pia-back/Gemfile.save /opt/pia-back/Gemfile
+pushd $final_path
+bundle install --without development test rmagick
+RAILS_ENV=production bin/rake generate_secret_token
 RAILS_ENV=production bin/rake db:migrate
 popd
 
 #=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
-ynh_print_info "Installing PIA Front End..."
-
-ynh_app_setting_set $app final_path $final_path
-# Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path" "front"
-
-#=================================================
 # NGINX CONFIGURATION
 #=================================================
+ynh_print_info "Upgrading nginx web server configuration..."
 
 # Create a dedicated nginx config
-#ynh_add_nginx_config
-
+ynh_add_nginx_config
 
 #=================================================
-# UPGRADE CONFIG
+# UPGRADE DEPENDENCIES
 #=================================================
-#cp -a ../conf/loolwsd.xml /etc/loolwsd
-#ynh_replace_string "__NEXTCLOUDDOMAIN__" "$nextcloud_domain" "/etc/loolwsd/loolwsd.xml"
-#ynh_replace_string "__PASSWORD__" "$password" "/etc/loolwsd/loolwsd.xml"
-#systemctl restart loolwsd
+#ynh_print_info "Upgrading dependencies..."
 
+#ynh_install_app_dependencies $pkg_dependencies
 
+#=================================================
+# CREATE DEDICATED USER
+#=================================================
+ynh_print_info "Making sure dedicated system user exists..."
 
-# If app is public, add url to SSOWat conf as skipped_uris
-#if [[ $is_public -eq 1 ]]; then
-  # See install script
-#  ynh_app_setting_set "$app" unprotected_uris "/"
-#fi
+# Create a dedicated user (if not existing)
+ynh_system_user_create $app
 
-# Start pia service
-systemctl start $app
+#=================================================
+# PHP-FPM CONFIGURATION
+#=================================================
+#ynh_print_info "Upgrading php-fpm configuration..."
+
+# Create a dedicated php-fpm config
+#ynh_add_fpm_config
+
+#=================================================
+# SPECIFIC UPGRADE
+#=================================================
+# ...
+#=================================================
+
+### Verify the checksum of a file, stored by `ynh_store_file_checksum` in the install script.
+### And create a backup of this file if the checksum is different. So the file will be backed up if the admin had modified it.
+ynh_backup_if_checksum_is_different "$final_path/config/database.yml"
+ynh_backup_if_checksum_is_different "$final_path/config/configuration.yml"
+# Recalculate and store the checksum of the file for the next upgrade.
+ynh_store_file_checksum "$final_path/config/database.yml"
+ynh_store_file_checksum "$final_path/config/configuration.yml"
+
+#=================================================
+# SETUP LOGROTATE
+#=================================================
+ynh_print_info "Upgrading logrotate configuration..."
+
+# Use logrotate to manage app-specific logfile(s)
+ynh_use_logrotate --non-append
+
+#=================================================
+# SETUP SYSTEMD
+#=================================================
+ynh_print_info "Upgrading systemd configuration..."
+
+# Create a dedicated systemd config
+ynh_add_systemd_config
+
+#=================================================
+# GENERIC FINALIZATION
+#=================================================
+# SECURE FILES AND DIRECTORIES
+#=================================================
+
+# Set permissions on app files
+chown -R $app:$app $final_path
+
+#=================================================
+# SETUP SSOWAT
+#=================================================
+ynh_print_info "Upgrading SSOwat configuration..."
+
+# Make app public if necessary
+if [ $is_public -eq 1 ]
+then
+	# unprotected_uris allows SSO credentials to be passed anyway
+	ynh_app_setting_set $app unprotected_uris "/"
+fi
+
+#=================================================
+# RELOAD NGINX
+#=================================================
+ynh_print_info "Reloading nginx web server..."
+
+systemctl reload nginx
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_print_info "Upgrade of $app completed"
