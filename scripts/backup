@@ -57,4 +57,4 @@ ynh_backup "db.sql"
 # BACKUP THE CRON FILE
 #=================================================
 
-ynh_backup "/etc/cron.d/$app"
+#ynh_backup "/etc/cron.d/$app"
