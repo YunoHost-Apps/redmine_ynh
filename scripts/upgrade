@@ -126,8 +126,8 @@ ynh_system_user_create $app
 ynh_backup_if_checksum_is_different "$final_path/config/database.yml"
 ynh_backup_if_checksum_is_different "$final_path/config/configuration.yml"
 # Recalculate and store the checksum of the file for the next upgrade.
-ynh_store_file_checksum "$final_path/config/database.yml"
-ynh_store_file_checksum "$final_path/config/configuration.yml"
+#ynh_store_file_checksum "$final_path/config/database.yml"
+#ynh_store_file_checksum "$final_path/config/configuration.yml"
 
 #=================================================
 # SETUP LOGROTATE
