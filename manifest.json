@@ -3,8 +3,8 @@
     "id": "redmine",
     "packaging_format": 1,
     "description": {
-        "en": "Redmine package for YunoHost.",
-        "fr": "Redmine pour YunoHost."
+        "en": "A flexible project management web application.",
+        "fr": "Un gestionnaire de projet flexible sous forme d'application web."
     },
     "version": "4.0.2",
     "url": "https://www.redmine.org/",
