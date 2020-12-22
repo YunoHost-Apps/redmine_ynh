@@ -5,8 +5,8 @@ Requires=postgresql.service
 
 [Service]
 Type=simple
-User=root
-Group=users
+User=__APP__
+Group=__APP__
 WorkingDirectory=/opt/redmine
 Environment=RAILS_SERVE_STATIC_FILES=true
 ExecStart=/bin/bash -c "/opt/redmine/bin/rails s -e production -b 127.0.0.1 -p 3000"

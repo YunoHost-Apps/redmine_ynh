@@ -3,10 +3,10 @@
     "id": "redmine",
     "packaging_format": 1,
     "description": {
-        "en": "A flexible project management web application.",
-        "fr": "Un gestionnaire de projet flexible sous forme d'application web."
+        "en": "Flexible project management web application.",
+        "fr": "Gestionnaire de projet flexible sous forme d'application web."
     },
-    "version": "4.0.2",
+    "version": "4.1.1",
     "url": "https://www.redmine.org/",
     "license": "GPL-2.0",
     "maintainer": {
@@ -14,13 +14,11 @@
         "email": "liberodark@gmail.com"
     },
     "requirements": {
-        "yunohost": ">= 2.7.2"
+        "yunohost": ">= 3.8.1"
     },
     "multi_instance": false,
     "services": [
-        "nginx",
-        "php5-fpm",
-        "mysql"
+        "nginx"
     ],
     "arguments": {
         "install": [{
@@ -48,10 +46,10 @@
                 "name": "is_public",
                 "type": "boolean",
                 "ask": {
-                    "en": "Is it a public site ?",
+                    "en": "Is it a public site?",
                     "fr": "Est-ce un site public ?"
                 },
-                "default": "true"
+                "default": true
             }
         ]
     }

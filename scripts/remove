@@ -92,16 +92,6 @@ ynh_print_info "Removing logrotate configuration"
 ynh_remove_logrotate
 
 #=================================================
-# CLOSE A PORT
-#=================================================
-
-if yunohost firewall list | grep -q "\- $port$"
-then
-	ynh_print_info "Closing port $port"
-	ynh_exec_warn_less yunohost firewall disallow TCP $port
-fi
-
-#=================================================
 # SPECIFIC REMOVE
 #=================================================
 
