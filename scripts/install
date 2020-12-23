@@ -76,8 +76,6 @@ ynh_script_progression --message="Installing Rails & Bunlder..." --time --weight
 
 ynh_install_ruby --ruby_version=$RUBY_VERSION
 
-gem install bundler
-
 #=================================================
 # CREATE A POSTGRESQL DATABASE
 #=================================================
@@ -133,9 +131,11 @@ cp -a ../conf/configuration.example.yml $final_path/config/configuration.yml
 ynh_print_info "Compile Redmine..."
 
 pushd $final_path
-	bundle install --without development test rmagick
-	RAILS_ENV=production bin/rake generate_secret_token
-	RAILS_ENV=production bin/rake db:migrate
+	gem install bundler
+	ynh_exec_as $app bundle install --without development test --path vendor/bundle
+	ynh_exec_as $app bundle exec rake generate_secret_token
+	ynh_exec_as $app RAILS_ENV=production bundle exec rake db:migrate
+	ynh_exec_as $app RAILS_ENV=production REDMINE_LANG=en bundle exec rake redmine:load_default_data
 popd
 
 #=================================================
@@ -160,6 +160,7 @@ ynh_add_nginx_config
 
 # Set permissions to app files
 chown -R $app:$app $final_path
+chmod -R 755 $final_path
 
 #=================================================
 # SETUP SSOWAT
