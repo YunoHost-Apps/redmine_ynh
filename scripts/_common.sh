@@ -5,7 +5,7 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="postgresql ruby-dev zlib1g-dev libpq-dev"
+pkg_dependencies="postgresql ruby-dev zlib1g-dev libpq-dev build-essential libxslt1-dev libxml2-dev imagemagick libmagickwand-dev"
 
 RUBY_VERSION="2.6.6"
 
@@ -48,8 +48,8 @@ SOURCE_SUM=80ad89ffe04c0b481503bd375f05c212bbc7d44ef5f5e649e0acdf25eba86736" > "
 
   # Build an app.src for ruby-build
   mkdir -p "../conf"
-  echo "SOURCE_URL=https://github.com/rbenv/ruby-build/archive/v20201221.tar.gz
-SOURCE_SUM=a1b71724f325e4003ea37fa618f7e0e8b334e77ffaf8ec1352931e123c9f2d3a" > "../conf/ruby-build.src"
+  echo "SOURCE_URL=https://github.com/rbenv/ruby-build/archive/v20200520.tar.gz
+SOURCE_SUM=52be6908a94fbd4a94f5064e8b19d4a3baa4b773269c3884165518d83bcc8922" > "../conf/ruby-build.src"
   # Download and extract ruby-build
   ynh_setup_source "$rbenv_install_dir/plugins/ruby-build" ruby-build
 

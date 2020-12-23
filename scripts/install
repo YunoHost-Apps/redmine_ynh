@@ -78,9 +78,6 @@ ynh_install_ruby --ruby_version=$RUBY_VERSION
 
 gem install bundler
 
-bundle install --without development test
-bundle exec rake generate_secret_token
-
 #=================================================
 # CREATE A POSTGRESQL DATABASE
 #=================================================
@@ -118,9 +115,17 @@ ynh_print_info "Install Redmine Conffiguration..."
 cp -a ../conf/database.example.yml $final_path/config/database.yml
 
 #ynh_replace_string "2.5.3"      "2.3.3"       "/opt/redmine/Gemfile"
-ynh_replace_string "yunouser"   "$db_name"    "$final_path/config/database.yml"
-ynh_replace_string "yunopass"   "$db_pwd"     "$final_path/config/database.yml"
-ynh_replace_string "yunobase"   "$db_name"    "$final_path/config/database.yml"
+ynh_replace_string "__DB_NAME__"      "$db_name"    "$final_path/config/database.yml"
+ynh_replace_string "__DB_PASSWORD__"  "$db_pwd"     "$final_path/config/database.yml"
+ynh_replace_string "__DB_NAME__"      "$db_name"    "$final_path/config/database.yml"
+
+
+#=================================================
+# MODIFY A CONFIG FILE
+#=================================================
+ynh_print_info "Install Redmine Conffiguration..."
+
+cp -a ../conf/configuration.example.yml $final_path/config/configuration.yml
 
 #=================================================
 # COMPILE REDMINE
@@ -128,9 +133,9 @@ ynh_replace_string "yunobase"   "$db_name"    "$final_path/config/database.yml"
 ynh_print_info "Compile Redmine..."
 
 pushd $final_path
-bundle install --without development test rmagick
-RAILS_ENV=production bin/rake generate_secret_token
-RAILS_ENV=production bin/rake db:migrate
+	bundle install --without development test rmagick
+	RAILS_ENV=production bin/rake generate_secret_token
+	RAILS_ENV=production bin/rake db:migrate
 popd
 
 #=================================================
@@ -146,24 +151,6 @@ systemctl enable $app.service
 
 # Create a dedicated nginx config
 ynh_add_nginx_config
-
-#=================================================
-# MODIFY A CONFIG FILE
-#=================================================
-#cp -a ../conf/onlyoffice-documentserver.conf /etc/onlyoffice/documentserver/nginx/onlyoffice-documentserver.conf
-#ynh_replace_string "__NEXTCLOUDDOMAIN__" "$nextcloud_domain" "/etc/loolwsd/loolwsd.xml"
-#ynh_replace_string "__PASSWORD__" "$password" "/etc/loolwsd/loolwsd.xml"
-
-#=================================================
-# STORE THE CONFIG FILE CHECKSUM
-#=================================================
-
-### `ynh_store_file_checksum` is used to store the checksum of a file.
-### That way, during the upgrade script, by using `ynh_backup_if_checksum_is_different`,
-### you can make a backup of this file before modifying it again if the admin had modified it.
-
-# Calculate and store the config file checksum into the app settings
-#ynh_store_file_checksum "/etc/onlyoffice/documentserver/nginx/onlyoffice-documentserver.conf"
 
 #=================================================
 # GENERIC FINALIZATION
