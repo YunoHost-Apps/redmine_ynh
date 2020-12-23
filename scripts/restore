@@ -52,6 +52,7 @@ ynh_restore_file "/etc/nginx/conf.d/$domain.d/$app.conf"
 #=================================================
 # RESTORE THE APP MAIN DIR
 #=================================================
+
 var_root=/home/yunohost.app/$app
 ynh_restore_file "$final_path"
 ynh_restore_file "$var_root"

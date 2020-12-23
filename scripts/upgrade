@@ -87,9 +87,9 @@ ynh_add_nginx_config
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-#ynh_print_info "Upgrading dependencies..."
+ynh_print_info "Upgrading dependencies..."
 
-#ynh_install_app_dependencies $pkg_dependencies
+ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # CREATE DEDICATED USER
@@ -98,14 +98,6 @@ ynh_print_info "Making sure dedicated system user exists..."
 
 # Create a dedicated user (if not existing)
 ynh_system_user_create $app
-
-#=================================================
-# PHP-FPM CONFIGURATION
-#=================================================
-#ynh_print_info "Upgrading php-fpm configuration..."
-
-# Create a dedicated php-fpm config
-#ynh_add_fpm_config
 
 #=================================================
 # SPECIFIC UPGRADE
@@ -145,18 +137,6 @@ ynh_add_systemd_config
 
 # Set permissions on app files
 chown -R $app:$app $final_path
-
-#=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_print_info "Upgrading SSOwat configuration..."
-
-# Make app public if necessary
-if [ $is_public -eq 1 ]
-then
-	# unprotected_uris allows SSO credentials to be passed anyway
-	ynh_app_setting_set $app unprotected_uris "/"
-fi
 
 #=================================================
 # RELOAD NGINX
