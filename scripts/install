@@ -36,9 +36,7 @@ app=$YNH_APP_INSTANCE_NAME
 #=================================================
 ynh_script_progression --message="Validating installation parameters..." --time --weight=1
 
-### If the app uses NGINX as web server (written in HTML/PHP in most cases), the final path should be "/var/www/$app".
-### If the app provides an internal web server (or uses another application server such as uWSGI), the final path should be "/opt/yunohost/$app"
-final_path=/opt/$app
+final_path=/opt/yunohost/$app
 test ! -e "$final_path" || ynh_die --message="This path already contains a folder"
 
 # Register (book) web path
@@ -65,14 +63,14 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing dependencies..." --time --weight=1
+ynh_script_progression --message="Installing dependencies..." --weight=1
 
 ynh_install_app_dependencies $pkg_dependencies
 
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Installing Rails & Bunlder..." --time --weight=1
+ynh_script_progression --message="Installing Rails & Bunlder..." --weight=1
 
 ynh_install_ruby --ruby_version=$RUBY_VERSION
 
@@ -91,32 +89,33 @@ ynh_psql_create_db $db_name $db_name $db_pwd
 #=================================================
 # CREATE DEDICATED USER
 #=================================================
-ynh_print_info "Create dedicated user..."
+ynh_script_progression --message="Configuring system user..." --weight=1
 
 # Create a system user
-ynh_system_user_create $app
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_print_info "Installing Redmine..."
+ynh_script_progression --message="Setting up source files..." --weight=1
 
-ynh_app_setting_set $app final_path $final_path
+ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 # Download, check integrity, uncompress and patch the source from app.src
-ynh_setup_source "$final_path"
+ynh_setup_source --dest_dir="$final_path"
+
+chmod 750 "$final_path"
+chmod -R o-rwx "$final_path"
+chown -R $app:www-data "$final_path"
 
 #=================================================
 # MODIFY A CONFIG FILE
 #=================================================
-ynh_print_info "Install Redmine Conffiguration..."
+ynh_script_progression --message="Adding a configuration file..." --weight=1
 
-cp -a ../conf/database.example.yml $final_path/config/database.yml
+ynh_add_config --template="../conf/database.example.yml" --destination="$final_path/config/database.yml"
 
-#ynh_replace_string "2.5.3"      "2.3.3"       "/opt/redmine/Gemfile"
-ynh_replace_string "__DB_NAME__"      "$db_name"    "$final_path/config/database.yml"
-ynh_replace_string "__DB_PASSWORD__"  "$db_pwd"     "$final_path/config/database.yml"
-ynh_replace_string "__DB_NAME__"      "$db_name"    "$final_path/config/database.yml"
-
+chmod 400 "$final_path/config/database.yml"
+chown $app:$app "$final_path/config/database.yml"
 
 #=================================================
 # MODIFY A CONFIG FILE
