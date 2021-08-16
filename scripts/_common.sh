@@ -5,7 +5,7 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="postgresql ruby-dev zlib1g-dev libpq-dev build-essential libxslt1-dev libxml2-dev imagemagick libmagickwand-dev"
+pkg_dependencies="postgresql libjemalloc-dev ruby-dev zlib1g zlib1g-dev libssl-dev libyaml-dev libcurl4-openssl-dev libpq-dev build-essential libapr1-dev libxslt1-dev libxml2-dev imagemagick libmagickwand-dev"
 
 RUBY_VERSION="2.6.6"
 
