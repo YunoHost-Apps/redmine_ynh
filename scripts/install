@@ -129,14 +129,20 @@ cp -a ../conf/configuration.example.yml $final_path/config/configuration.yml
 #=================================================
 ynh_print_info "Compile Redmine..."
 
+# pushd $final_path
+# 	gem install bundler
+# 	ynh_exec_as $app bundle install --without development test --path vendor/bundle
+# 	ynh_exec_as $app bundle exec rake generate_secret_token
+# 	ynh_exec_as $app RAILS_ENV=production bundle exec rake db:migrate
+# 	ynh_exec_as $app RAILS_ENV=production REDMINE_LANG=en bundle exec rake redmine:load_default_data
+# popd
+
 pushd $final_path
-	gem install bundler
-	ynh_exec_as $app bundle install --without development test --path vendor/bundle
+	ynh_exec_as $app bundle install
 	ynh_exec_as $app bundle exec rake generate_secret_token
 	ynh_exec_as $app RAILS_ENV=production bundle exec rake db:migrate
-	ynh_exec_as $app RAILS_ENV=production REDMINE_LANG=en bundle exec rake redmine:load_default_data
+	ynh_exec_as $app RAILS_ENV=production bundle exec rake redmine:load_default_data
 popd
-
 #=================================================
 # SETUP SYSTEMD
 #=================================================
