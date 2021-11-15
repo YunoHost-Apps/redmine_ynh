@@ -6,7 +6,7 @@
         "en": "Flexible project management web application",
         "fr": "Gestionnaire de projet flexible sous forme d'application web"
     },
-    "version": "4.1.1",
+    "version": "4.2.3~ynh1",
     "url": "https://www.redmine.org/",
     "license": "GPL-2.0",
     "maintainer": {
@@ -23,8 +23,7 @@
     "arguments": {
         "install": [{
                 "name": "domain",
-                "type": "domain",
-                "example": "example.com"
+                "type": "domain"
             },
             {
                 "name": "path",

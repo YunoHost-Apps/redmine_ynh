@@ -3,7 +3,7 @@ production:
   database: __DB_NAME__
   host: localhost
   username: __DB_NAME__
-  password: __DB_PASSWORD__
+  password: __DB_PWD__
   encoding: utf8
   schema_search_path: public
 

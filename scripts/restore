@@ -26,18 +26,17 @@ ynh_abort_if_errors
 
 app=$YNH_APP_INSTANCE_NAME
 
-domain=$(ynh_app_setting_get $app domain)
-path_url=$(ynh_app_setting_get $app path)
-final_path=$(ynh_app_setting_get $app final_path)
-db_name=$(ynh_app_setting_get $app psql_db)
-db_pwd=$(ynh_app_setting_get $app psqlpwd)
+domain=$(ynh_app_setting_get --app=$app --key=domain)
+path_url=$(ynh_app_setting_get --app=$app --key=path)
+final_path=$(ynh_app_setting_get --app=$app --key=final_path)
+db_name=$(ynh_app_setting_get --app=$app --key=db_name)
+db_user=$db_name
+db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
 
 #=================================================
 # CHECK IF THE APP CAN BE RESTORED
 #=================================================
 
-ynh_webpath_available $domain $path_url \
-	|| ynh_die "Path not available: ${domain}${path_url}"
 test ! -d $final_path \
 	|| ynh_die "There is already a directory: $final_path "
 
@@ -71,7 +70,7 @@ ynh_psql_execute_file_as_root ./db.sql "$db_name"
 #=================================================
 
 # Create the dedicated user (if not existing)
-ynh_system_user_create $app
+ynh_system_user_create --username=$app --home_dir="$final_path"
 
 #=================================================
 # RESTORE USER RIGHTS
