@@ -1,9 +1,9 @@
 production:
-  adapter:  postgresql
-  host:     localhost
+  adapter: postgresql
+  database: __DB_NAME__
+  host: localhost
+  username: __DB_USER__
+  password: __DB_PWD__
   encoding: utf8
-  database: yunobase
-  pool:     5
-  username: yunouser
-  password: yunopass
+  pool: 5
   template: template0

@@ -6,52 +6,42 @@
         "en": "A flexible project management web application.",
         "fr": "Un gestionnaire de projet flexible sous forme d'application web."
     },
-    "version": "4.0.2",
+    "version": "4.2.4~ynh1",
     "url": "https://www.redmine.org/",
+    "upstream": {
+        "license": "GPL-2.0",
+        "website": "https://www.redmine.org",
+        "code": "https://github.com/redmine/redmine"
+    },
     "license": "GPL-2.0",
     "maintainer": {
         "name": "liberodark",
         "email": "liberodark@gmail.com"
     },
     "requirements": {
-        "yunohost": ">= 2.7.2"
+        "yunohost": ">= 4.3.0"
     },
     "multi_instance": false,
     "services": [
         "nginx",
-        "php5-fpm",
         "mysql"
     ],
     "arguments": {
-        "install": [{
+        "install": [
+            {
                 "name": "domain",
-                "type": "domain",
-                "ask": {
-                    "en": "Choose a domain name for Redmine",
-                    "fr": "Choisissez un nom de domaine pour Redmine"
-                },
-                "example": "example.com"
+                "type": "domain"
             },
-
             {
                 "name": "path",
                 "type": "path",
-                "ask": {
-                    "en": "Choose a path for Redmine /red is accepted",
-                    "fr": "Choisissez un chemin pour Redmine /red est accepté"
-                },
                 "example": "/red",
                 "default": "/red"
             },
-            
             {
                 "name": "is_public",
                 "type": "boolean",
-                "ask": {
-                    "en": "Is it a public site ?",
-                    "fr": "Est-ce un site public ?"
-                },
-                "default": "true"
+                "default": true
             }
         ]
     }
