@@ -5,11 +5,13 @@ Requires=postgresql.service
 
 [Service]
 Type=simple
-User=root
-Group=users
-WorkingDirectory=/opt/redmine
+User=__APP__
+Group=__APP__
+WorkingDirectory=__FINALPATH__/
+Environment="__YNH_RUBY_LOAD_PATH__"
 Environment=RAILS_SERVE_STATIC_FILES=true
-ExecStart=/bin/bash -c "/opt/redmine/bin/rails s -e production -b 127.0.0.1 -p 3000"
+ExecStart=/opt/rbenv/versions/__APP__/bin/ruby bin/rails server -e production -b 127.0.0.1 -p __PORT__
+StandardOutput=append:/var/log/__APP__/__APP__.log
 TimeoutSec=30
 RestartSec=15s
 Restart=always
