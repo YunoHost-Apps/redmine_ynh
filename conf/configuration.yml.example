@@ -13,6 +13,10 @@ default:
   # See the examples below and the Rails guide for more configuration options:
   # http://guides.rubyonrails.org/action_mailer_basics.html#action-mailer-configuration
   email_delivery:
+    delivery_method: :smtp
+    smtp_settings:
+      address: "localhost"
+      port: 25
 
   # ==== Simple SMTP server at localhost
   #
@@ -138,11 +142,12 @@ default:
   # scm_stderr_log_file: /var/log/redmine_scm_stderr.log
   scm_stderr_log_file:
 
-  # Key used to encrypt sensitive data in the database (SCM and LDAP passwords).
+  # Key used to encrypt sensitive data in the database (SCM passwords,
+  # LDAP passwords, and TOTP (two-factor authentication) secret keys).
   # If you don't want to enable data encryption, just leave it blank.
   # WARNING: losing/changing this key will make encrypted data unreadable.
   #
-  # If you want to encrypt existing passwords in your database:
+  # If you want to encrypt existing data in your database:
   # * set the cipher key here in your configuration file
   # * encrypt data using 'rake db:encrypt RAILS_ENV=production'
   #
@@ -179,27 +184,29 @@ default:
   # the ImageMagick's `convert` binary. Used to generate attachment thumbnails.
   #imagemagick_convert_command:
 
-  # Configuration of RMagick font.
+  # Absolute path (e.g. /usr/bin/gs, c:/ghostscript/gs.exe) to
+  # the `gs` binary. Used to generate attachment thumbnails of PDF files.
+  #gs_command:
+
+  # Configuration of MiniMagick font.
   #
-  # Redmine uses RMagick in order to export gantt png.
-  # You don't need this setting if you don't install RMagick.
+  # Redmine uses MiniMagick in order to export a gantt chart to a PNG image.
+  # This setting is necessary to properly display CJK (Chinese, Japanese,
+  # and Korean) characters in the PNG image. Please make sure that the
+  # specified font is installed in the Redmine server.
   #
-  # In CJK (Chinese, Japanese and Korean),
-  # in order to show CJK characters correctly,
-  # you need to set this configuration.
+  # This setting is necessary only when CJK characters are used in gantt.
   #
-  # Because there is no standard font across platforms in CJK,
-  # you need to set a font installed in your server.
-  #
-  # This setting is not necessary in non CJK.
+  # Note that rmagick_font_path in prior to Redmine 4.1.0 has been renamed
+  # to minimagick_font_path.
   #
   # Examples for Japanese:
   #   Windows:
-  #     rmagick_font_path: C:\windows\fonts\msgothic.ttc
+  #     minimagick_font_path: C:\windows\fonts\msgothic.ttc
   #   Linux:
-  #     rmagick_font_path: /usr/share/fonts/ipa-mincho/ipam.ttf
+  #     minimagick_font_path: /usr/share/fonts/ipa-mincho/ipam.ttf
   #
-  rmagick_font_path:
+  minimagick_font_path:
 
   # Maximum number of simultaneous AJAX uploads
   #max_concurrent_ajax_uploads: 2
@@ -208,6 +215,18 @@ default:
   #
   # allowed values: :memory, :file, :memcache
   #openid_authentication_store: :memory
+
+  # URL of the avatar server
+  #
+  # By default, Redmine uses Gravatar as the avatar server for displaying
+  # user icons. You can switch to another Gravatar-compatible server such
+  # as Libravatar and opensource servers listed on
+  # https://wiki.libravatar.org/running_your_own/
+  #
+  # URL of each avatar is: #{avatar_server_url}/avatar/#{hash}
+  #
+  #avatar_server_url: https://www.gravatar.com        # default
+  #avatar_server_url: https://seccdn.libravatar.org
 
 # specific configuration options for production environment
 # that overrides the default ones
