@@ -1,5 +1,5 @@
-SOURCE_URL=https://www.redmine.org/releases/redmine-4.2.4.tar.gz
-SOURCE_SUM=cf649f5d4ff783582f82bebd4a5099ef63acb3d5573bbe6b4bf64f293c61c9ce
+SOURCE_URL=https://github.com/redmine/redmine/archive/refs/tags/4.2.4.tar.gz
+SOURCE_SUM=c6214ef1279eecfdead9104fe032ccc07fc66dda4106c3dceb475d29795fa6ac
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
