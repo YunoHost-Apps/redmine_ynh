@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
 
-**Shipped version:** 4.2.4~ynh1
+**Shipped version:** 4.2.4~ynh2
 
 
 
