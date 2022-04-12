@@ -129,6 +129,11 @@ ynh_add_config --template="../conf/configuration.yml.example" --destination="$fi
 chmod 400 "$final_path/config/configuration.yml"
 chown $app:$app "$final_path/config/configuration.yml"
 
+if [[ "$path_url" != "/" ]]
+then
+     echo Redmine::Utils::relative_url_root = "$path_url" >> "$final_path/config/environment.rb"
+fi
+
 #=================================================
 # BUILD APP
 #=================================================
