@@ -65,7 +65,6 @@ ynh_script_progression --message="Ensuring downward compatibility..."
 # Cleaning legacy permissions
 if ynh_legacy_permissions_exists; then
 	ynh_legacy_permissions_delete_all
-
 	ynh_app_setting_delete --app=$app --key=is_public
 fi
 
@@ -86,7 +85,7 @@ then
 	ynh_script_progression --message="Upgrading source files..."
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path"
+	ynh_setup_source --dest_dir="$final_path" --keep="$final_path/config/database.yml $final_path/config/configuration.yml"
 fi
 
 mkdir -p "$final_path/files" "$final_path/log" "$final_path/tmp" "$final_path/public/plugin_assets"
@@ -117,17 +116,15 @@ ynh_install_ruby --ruby_version=$ruby_version
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+# ynh_script_progression --message="Adding a configuration file..."
 
-ynh_add_config --template="../conf/database.example.yml" --destination="$final_path/config/database.yml"
+# ynh_add_config --template="../conf/database.example.yml" --destination="$final_path/config/database.yml"
+# chmod 400 "$final_path/config/database.yml"
+# chown $app:$app "$final_path/config/database.yml"
 
-chmod 400 "$final_path/config/database.yml"
-chown $app:$app "$final_path/config/database.yml"
-
-ynh_add_config --template="../conf/configuration.yml.example" --destination="$final_path/config/configuration.yml"
-
-chmod 400 "$final_path/config/configuration.yml"
-chown $app:$app "$final_path/config/configuration.yml"
+# ynh_add_config --template="../conf/configuration.yml.example" --destination="$final_path/config/configuration.yml"
+# chmod 400 "$final_path/config/configuration.yml"
+# chown $app:$app "$final_path/config/configuration.yml"
 
 #=================================================
 # BUILD APP
@@ -144,7 +141,7 @@ pushd $final_path
 	ynh_exec_warn_less bundle exec rake db:migrate RAILS_ENV=production
 popd
 
-ynh_install_app_dependencies $pkg_dependencies
+#ynh_install_app_dependencies $pkg_dependencies
 
 chmod 750 "$final_path/public"
 chmod -R o-rwx "$final_path/public"
