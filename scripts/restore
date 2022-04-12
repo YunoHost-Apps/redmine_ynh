@@ -91,8 +91,6 @@ ynh_psql_test_if_first_run
 ynh_psql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
 ynh_psql_execute_file_as_root --file="./db.sql" --database=$db_name
 
-
-
 #=================================================
 # BUILD APP
 #=================================================
@@ -102,9 +100,9 @@ pushd $final_path
 	ynh_use_ruby
 	ynh_gem update --system --no-document
 	ynh_gem install bundler passenger --no-document
-	bundle config set --local without 'development test'
+	bundle config set --local without 'development test rmagick'
 	bundle install
-	bundle install --without development test rmagick
+	#bundle install --without development test rmagick
 popd
 
 ynh_install_app_dependencies $pkg_dependencies
