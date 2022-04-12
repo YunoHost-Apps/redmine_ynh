@@ -6,7 +6,7 @@
         "en": "Flexible project management web application",
         "fr": "Gestionnaire de projet flexible sous forme d'application web"
     },
-    "version": "5.0.0~ynh1",
+    "version": "4.2.4~ynh2",
     "url": "https://www.redmine.org/",
     "upstream": {
         "license": "GPL-2.0",
