@@ -86,7 +86,7 @@ then
 	ynh_script_progression --message="Upgrading source files..."
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path"
+	ynh_setup_source --dest_dir="$final_path" --keep="$final_path/config/database.yml $final_path/config/configuration.yml $final_path/config/environment.rb"
 fi
 
 mkdir -p "$final_path/files" "$final_path/log" "$final_path/tmp" "$final_path/public/plugin_assets"
@@ -117,17 +117,17 @@ ynh_install_ruby --ruby_version=$ruby_version
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
-ynh_script_progression --message="Adding a configuration file..."
+# ynh_script_progression --message="Adding a configuration file..."
 
-ynh_add_config --template="../conf/database.example.yml" --destination="$final_path/config/database.yml"
+# ynh_add_config --template="../conf/database.example.yml" --destination="$final_path/config/database.yml"
 
-chmod 400 "$final_path/config/database.yml"
-chown $app:$app "$final_path/config/database.yml"
+# chmod 400 "$final_path/config/database.yml"
+# chown $app:$app "$final_path/config/database.yml"
 
-ynh_add_config --template="../conf/configuration.yml.example" --destination="$final_path/config/configuration.yml"
+# ynh_add_config --template="../conf/configuration.yml.example" --destination="$final_path/config/configuration.yml"
 
-chmod 400 "$final_path/config/configuration.yml"
-chown $app:$app "$final_path/config/configuration.yml"
+# chmod 400 "$final_path/config/configuration.yml"
+# chown $app:$app "$final_path/config/configuration.yml"
 
 #=================================================
 # BUILD APP
@@ -140,7 +140,6 @@ pushd $final_path
 	ynh_gem install bundler passenger --no-document
 	bundle config set --local without 'development test rmagick'
 	bundle install
-	#bundle install --without development test rmagick
 	ynh_exec_warn_less bundle exec rake db:migrate RAILS_ENV=production
 popd
 

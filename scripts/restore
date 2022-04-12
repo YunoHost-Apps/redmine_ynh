@@ -102,7 +102,6 @@ pushd $final_path
 	ynh_gem install bundler passenger --no-document
 	bundle config set --local without 'development test rmagick'
 	bundle install
-	#bundle install --without development test rmagick
 popd
 
 ynh_install_app_dependencies $pkg_dependencies
