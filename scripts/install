@@ -25,7 +25,7 @@ ynh_abort_if_errors
 #=================================================
 
 domain=$YNH_APP_ARG_DOMAIN
-path_url="/"
+path_url=$YNH_APP_ARG_PATH
 is_public=$YNH_APP_ARG_IS_PUBLIC
 
 app=$YNH_APP_INSTANCE_NAME
@@ -126,6 +126,11 @@ chown $app:$app "$final_path/config/database.yml"
 ynh_add_config --template="../conf/configuration.yml.example" --destination="$final_path/config/configuration.yml"
 chmod 400 "$final_path/config/configuration.yml"
 chown $app:$app "$final_path/config/configuration.yml"
+
+if [[ "$path_url" != "/" ]]
+then
+     echo "Redmine::Utils::relative_url_root = '$path_url'" >> "$final_path/config/environment.rb"
+fi
 
 #=================================================
 # BUILD APP

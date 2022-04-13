@@ -85,7 +85,7 @@ then
 	ynh_script_progression --message="Upgrading source files..."
 
 	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$final_path" --keep="$final_path/config/database.yml $final_path/config/configuration.yml"
+	ynh_setup_source --dest_dir="$final_path" --keep="$final_path/config/database.yml $final_path/config/configuration.yml $final_path/config/environment.rb"
 fi
 
 mkdir -p "$final_path/files" "$final_path/log" "$final_path/tmp" "$final_path/public/plugin_assets"
@@ -109,6 +109,7 @@ ynh_add_nginx_config
 ynh_script_progression --message="Upgrading dependencies..."
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies $build_pkg_dependencies
+
 ynh_exec_warn_less ynh_install_ruby --ruby_version=$ruby_version
 
 #=================================================
