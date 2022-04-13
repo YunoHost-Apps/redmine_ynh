@@ -66,7 +66,7 @@ ynh_app_setting_set --app=$app --key=port --value=$port
 ynh_script_progression --message="Installing dependencies..."
 
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies $build_pkg_dependencies
-ynh_install_ruby --ruby_version=$ruby_version
+ynh_exec_warn_less ynh_install_ruby --ruby_version=$ruby_version
 
 #=================================================
 # CREATE DEDICATED USER
@@ -143,7 +143,7 @@ pushd $final_path
 	#ynh_exec_warn_less bundle exec rake redmine:load_default_data RAILS_ENV=production
 popd
 
-#ynh_install_app_dependencies $pkg_dependencies
+ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 chmod 750 "$final_path/public"
 chmod -R o-rwx "$final_path/public"

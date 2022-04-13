@@ -79,7 +79,7 @@ ynh_script_progression --message="Reinstalling dependencies..."
 
 # Define and install dependencies
 ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies $build_pkg_dependencies
-ynh_install_ruby --ruby_version=$ruby_version
+ynh_exec_warn_less ynh_install_ruby --ruby_version=$ruby_version
 
 #=================================================
 # RESTORE THE POSTGRESQL DATABASE
@@ -90,8 +90,6 @@ db_pwd=$(ynh_app_setting_get --app=$app --key=psqlpwd)
 ynh_psql_test_if_first_run
 ynh_psql_setup_db --db_user=$db_user --db_name=$db_name --db_pwd=$db_pwd
 ynh_psql_execute_file_as_root --file="./db.sql" --database=$db_name
-
-
 
 #=================================================
 # BUILD APP
@@ -107,7 +105,7 @@ pushd $final_path
 	bundle install --without development test rmagick
 popd
 
-ynh_install_app_dependencies $pkg_dependencies
+ynh_exec_warn_less ynh_install_app_dependencies $pkg_dependencies
 
 chmod 750 "$final_path/public"
 chmod -R o-rwx "$final_path/public"
