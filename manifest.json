@@ -3,8 +3,8 @@
     "id": "redmine",
     "packaging_format": 1,
     "description": {
-        "en": "A flexible project management web application.",
-        "fr": "Un gestionnaire de projet flexible sous forme d'application web."
+        "en": "Flexible project management web application",
+        "fr": "Gestionnaire de projet flexible sous forme d'application web"
     },
     "version": "4.2.4~ynh2",
     "url": "https://www.redmine.org/",
@@ -31,12 +31,6 @@
             {
                 "name": "domain",
                 "type": "domain"
-            },
-            {
-                "name": "path",
-                "type": "path",
-                "example": "/red",
-                "default": "/red"
             },
             {
                 "name": "is_public",
