@@ -13,6 +13,8 @@
 		upgrade=1
 		# 4.2.4~ynh1
 		upgrade=1	from_commit=6277cb3c4fa367d87b83895961f7733a7a278fe1
+		# 4.2.4~ynh2
+		upgrade=1	from_commit=758922052169f08178c704d889246532fe5fae83
 		backup_restore=1
 		multi_instance=1
 		port_already_use=0
