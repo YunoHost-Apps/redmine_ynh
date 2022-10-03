@@ -1,5 +1,5 @@
-SOURCE_URL=https://github.com/redmine/redmine/archive/refs/tags/4.2.7.tar.gz
-SOURCE_SUM=aa413ed529da0576c08f2d42ab65555692dd40a632604fb22fa60b20338b0ff9
+SOURCE_URL=https://github.com/redmine/redmine/archive/refs/tags/5.0.3.tar.gz
+SOURCE_SUM=e340a68442c7d7338223d11e3f4e26c778d112126fdc796e7dbc452d2e4b0b77
 SOURCE_SUM_PRG=sha256sum
 SOURCE_FORMAT=tar.gz
 SOURCE_IN_SUBDIR=true
