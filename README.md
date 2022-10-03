@@ -18,7 +18,7 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
 
-**Shipped version:** 4.2.7~ynh1
+**Shipped version:** 5.0.3~ynh1 *(:warning: This is the `ci-auto-update-v5.0.3` branch. The [`master` branch](https://github.com/YunoHost-Apps/redmine_ynh/tree/master) used in the catalog is currently on version 4.2.7\~ynh1.)*
 
 
 ## Screenshots
