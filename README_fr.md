@@ -18,8 +18,7 @@ Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour
 Redmine est une application web de gestion de projet flexible écrite à l'aide du framework Ruby on Rails.
 
 
-**Version incluse :** 4.2.7~ynh1
-
+**Version incluse :** 5.0.4~ynh1
 
 ## Captures d'écran
 
