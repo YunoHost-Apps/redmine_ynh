@@ -5,24 +5,24 @@ It shall NOT be edited by hand.
 
 # Redmine pour YunoHost
 
-[![Niveau d'intégration](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)  
 [![Installer Redmine avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=redmine)
 
 *[Read this readme in english.](./README.md)*
 
-> *Ce package vous permet d'installer Redmine rapidement et simplement sur un serveur YunoHost.
-Si vous n'avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l'installer et en profiter.*
+> *Ce package vous permet d’installer Redmine rapidement et simplement sur un serveur YunoHost.
+Si vous n’avez pas YunoHost, regardez [ici](https://yunohost.org/#/install) pour savoir comment l’installer et en profiter.*
 
-## Vue d'ensemble
+## Vue d’ensemble
 
 Redmine est une application web de gestion de projet flexible écrite à l'aide du framework Ruby on Rails.
 
 
 **Version incluse :** 5.0.4~ynh1
 
-## Captures d'écran
+## Captures d’écran
 
-![Capture d'écran de Redmine](./doc/screenshots/Redmine-demo.png)
+![Capture d’écran de Redmine](./doc/screenshots/Redmine-demo.png)
 
 ## Avertissements / informations importantes
 
@@ -35,8 +35,8 @@ Vous pouvez aller dans le menu Administration et choisir Paramètres pour modifi
 
 ## Documentations et ressources
 
-* Site officiel de l'app : <https://www.redmine.org>
-* Dépôt de code officiel de l'app : <https://github.com/redmine/redmine>
+* Site officiel de l’app : <https://www.redmine.org>
+* Dépôt de code officiel de l’app : <https://github.com/redmine/redmine>
 * Documentation YunoHost pour cette app : <https://yunohost.org/app_redmine>
 * Signaler un bug : <https://github.com/YunoHost-Apps/redmine_ynh/issues>
 
@@ -52,4 +52,4 @@ ou
 sudo yunohost app upgrade redmine -u https://github.com/YunoHost-Apps/redmine_ynh/tree/testing --debug
 ```
 
-**Plus d'infos sur le packaging d'applications :** <https://yunohost.org/packaging_apps>
+**Plus d’infos sur le packaging d’applications :** <https://yunohost.org/packaging_apps>
