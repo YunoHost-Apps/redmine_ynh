@@ -8,6 +8,6 @@ INSERT INTO  public.auth_sources(type, name, host, port, base_dn, attr_login, at
         'sn',
         'givenName',
         'mail',
-        t,
+        TRUE,
         '(&(objectclass=posixAccount)(permission=cn=redmine.main,ou=permission,dc=yunohost,dc=org))'
 )
