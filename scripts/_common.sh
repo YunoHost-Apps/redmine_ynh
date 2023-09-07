@@ -5,8 +5,8 @@
 #=================================================
 
 # dependencies used by the app
-pkg_dependencies="postgresql"
-build_pkg_dependencies="libpq-dev"
+#REMOVEME? pkg_dependencies="postgresql"
+#REMOVEME? build_pkg_dependencies="libpq-dev"
 
 ruby_version=2.6
 
