@@ -4,10 +4,6 @@
 # COMMON VARIABLES
 #=================================================
 
-# dependencies used by the app
-#REMOVEME? pkg_dependencies="postgresql"
-#REMOVEME? build_pkg_dependencies="libpq-dev"
-
 ruby_version=2.6
 
 #=================================================
