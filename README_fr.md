@@ -25,15 +25,6 @@ Redmine est une application web de gestion de projet flexible écrite à l'aide 
 
 ![Capture d’écran de Redmine](./doc/screenshots/Redmine-demo.png)
 
-## Avertissements / informations importantes
-
-Utilisez le compte administrateur par défaut pour vous connecter :
-
-- login : admin
-- mot de passe : admin
-
-Vous pouvez aller dans le menu Administration et choisir Paramètres pour modifier la plupart des paramètres de l'application.
-
 ## Documentations et ressources
 
 * Site officiel de l’app : <https://www.redmine.org>

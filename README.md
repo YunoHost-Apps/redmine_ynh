@@ -25,15 +25,6 @@ Redmine is a flexible project management web application written using Ruby on R
 
 ![Screenshot of Redmine](./doc/screenshots/Redmine-demo.png)
 
-## Disclaimers / important information
-
-Use default administrator account to log in:
-
-- login: admin
-- password: admin
-
-You can go to Administration menu and choose Settings to modify most of the application settings.
-
 ## Documentation and resources
 
 * Official app website: <https://www.redmine.org>
