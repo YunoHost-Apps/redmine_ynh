@@ -4,11 +4,7 @@
 # COMMON VARIABLES
 #=================================================
 
-# dependencies used by the app
-pkg_dependencies="postgresql"
-build_pkg_dependencies="libpq-dev"
-
-ruby_version=2.6
+ruby_version=3.0
 
 #=================================================
 # PERSONAL HELPERS

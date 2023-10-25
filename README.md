@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Redmine for YunoHost
 
-[![Integration level](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![Working status](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)  
+[![Integration level](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![Working status](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Maintenance status](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)
+
 [![Install Redmine with YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=redmine)
 
 *[Lire ce readme en français.](./README_fr.md)*
@@ -18,26 +19,16 @@ If you don't have YunoHost, please consult [the guide](https://yunohost.org/#/in
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
 
-**Shipped version:** 5.0.4~ynh1
+**Shipped version:** 5.0.6~ynh1
 
 ## Screenshots
 
 ![Screenshot of Redmine](./doc/screenshots/Redmine-demo.png)
 
-## Disclaimers / important information
-
-Use default administrator account to log in:
-
-- login: admin
-- password: admin
-
-You can go to Administration menu and choose Settings to modify most of the application settings.
-
 ## Documentation and resources
 
 * Official app website: <https://www.redmine.org>
 * Upstream app code repository: <https://github.com/redmine/redmine>
-* YunoHost documentation for this app: <https://yunohost.org/app_redmine>
 * Report a bug: <https://github.com/YunoHost-Apps/redmine_ynh/issues>
 
 ## Developer info
