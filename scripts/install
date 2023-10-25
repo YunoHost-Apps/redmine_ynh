@@ -54,6 +54,8 @@ ynh_add_config --template="../conf/configuration.yml.example" --destination="$in
 chmod 400 "$install_dir/config/configuration.yml"
 chown $app:$app "$install_dir/config/configuration.yml"
 
+ynh_add_config --template="db-ldap.sql" --destination="$install_dir/config/db-ldap.sql"
+
 #=================================================
 # BUILD APP
 #=================================================
