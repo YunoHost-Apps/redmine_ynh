@@ -36,6 +36,7 @@ ram.runtime = "50M"
         [resources.sources.main]
         url = "https://github.com/redmine/redmine/archive/refs/tags/5.0.5.tar.gz"
         sha256 = "938044804e81a57025d2c110c5a22ff9a0c59954062c927dd2b6a521dce2ea4d"
+        autoupdate.strategy = "latest_github_tag"
 
     [resources.system_user]
 
