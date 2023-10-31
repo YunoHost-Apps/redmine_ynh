@@ -5,7 +5,8 @@ It shall NOT be edited by hand.
 
 # Redmine pour YunoHost
 
-[![Niveau d’intégration](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)  
+[![Niveau d’intégration](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![Statut du fonctionnement](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Statut de maintenance](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)
+
 [![Installer Redmine avec YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=redmine)
 
 *[Read this readme in english.](./README.md)*
@@ -37,7 +38,7 @@ Vous pouvez aller dans le menu Administration et choisir Paramètres pour modifi
 
 * Site officiel de l’app : <https://www.redmine.org>
 * Dépôt de code officiel de l’app : <https://github.com/redmine/redmine>
-* Documentation YunoHost pour cette app : <https://yunohost.org/app_redmine>
+* YunoHost Store: <https://apps.yunohost.org/app/redmine>
 * Signaler un bug : <https://github.com/YunoHost-Apps/redmine_ynh/issues>
 
 ## Informations pour les développeurs
