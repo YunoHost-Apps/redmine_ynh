@@ -29,6 +29,7 @@ Redmine is a flexible project management web application written using Ruby on R
 
 * Official app website: <https://www.redmine.org>
 * Upstream app code repository: <https://github.com/redmine/redmine>
+* YunoHost Store: <https://apps.yunohost.org/app/redmine>
 * Report a bug: <https://github.com/YunoHost-Apps/redmine_ynh/issues>
 
 ## Developer info

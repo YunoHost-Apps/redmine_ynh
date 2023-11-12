@@ -29,6 +29,7 @@ Redmine est une application web de gestion de projet flexible écrite à l'aide 
 
 * Site officiel de l’app : <https://www.redmine.org>
 * Dépôt de code officiel de l’app : <https://github.com/redmine/redmine>
+* YunoHost Store: <https://apps.yunohost.org/app/redmine>
 * Signaler un bug : <https://github.com/YunoHost-Apps/redmine_ynh/issues>
 
 ## Informations pour les développeurs
