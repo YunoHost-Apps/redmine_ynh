@@ -51,19 +51,22 @@ ram.runtime = "50M"
 
         # For Ruby
         "autoconf",
-        "automake",
-        "bison",
         "build-essential",
-        "curl",
-        "libjemalloc-dev",
-        "libreadline-dev",
-        "libsqlite3-dev",
+        "libdb-dev",
+        "libffi-dev",
+        "libgdbm-dev",
+        "libgdbm6",
+        "libgmp-dev",
+        "libncurses5-dev",
+        "libreadline6-dev",
         "libssl-dev",
-        "libtool",
-        "libxml2-dev",
-        "libxslt-dev",
-        "openssl",
+        "libyaml-dev",
+        "patch",
+        "rustc",
+        "uuid-dev",
         "zlib1g-dev",
+
+        "openssl",
     ]
 
     [resources.database]
