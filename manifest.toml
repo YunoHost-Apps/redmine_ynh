@@ -47,8 +47,23 @@ ram.runtime = "50M"
 
     [resources.apt]
     packages = [
-        "postgresql, libpq-dev",
+        "postgresql", "libpq-dev",
+
+        # For Ruby
+        "autoconf",
+        "automake",
+        "bison",
+        "build-essential",
+        "curl",
+        "libjemalloc-dev",
+        "libreadline-dev",
+        "libsqlite3-dev",
+        "libssl-dev",
+        "libtool",
+        "libxml2-dev",
+        "libxslt-dev",
         "openssl",
+        "zlib1g-dev",
     ]
 
     [resources.database]
