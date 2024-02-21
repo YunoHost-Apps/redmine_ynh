@@ -46,7 +46,10 @@ ram.runtime = "50M"
     main.url = "/"
 
     [resources.apt]
-    packages = "postgresql, libpq-dev"
+    packages = [
+        "postgresql, libpq-dev",
+        "openssl",
+    ]
 
     [resources.database]
     type = "postgresql"
