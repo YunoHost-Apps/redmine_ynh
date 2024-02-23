@@ -43,14 +43,7 @@ ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name
 #=================================================
 ynh_script_progression --message="Building app..." --weight=1
 
-pushd "$install_dir"
-    ynh_use_ruby
-    ynh_gem update --system --no-document
-    ynh_gem install bundler passenger --no-document
-    bundle config set --local without 'development test rmagick'
-    bundle add 'webrick' --version '~> 1.7'
-    bundle install
-popd
+_redmine_ruby_install
 
 chmod 750 "$install_dir/public"
 chmod -R o-rwx "$install_dir/public"
