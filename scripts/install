@@ -55,13 +55,13 @@ ynh_script_progression --message="Building app..." --weight=1
 
 pushd "$install_dir"
     ynh_use_ruby
-    ynh_exec_as "$app" ynh_gem update --system --no-document
-    ynh_exec_as "$app" ynh_gem install bundler passenger --no-document
-    ynh_exec_as "$app" bundle config set --local without 'development test rmagick'
-    ynh_exec_as "$app" bundle add 'webrick' --version '~> 1.7'
-    ynh_exec_as "$app" bundle install
-    ynh_exec_as "$app" ynh_exec_warn_less bundle exec rake generate_secret_token RAILS_ENV=production
-    ynh_exec_as "$app" ynh_exec_warn_less bundle exec rake db:migrate RAILS_ENV=production
+    ynh_gem update --system --no-document
+    ynh_gem install bundler passenger --no-document
+    bundle config set --local without 'development test rmagick'
+    bundle add 'webrick' --version '~> 1.7'
+    bundle install
+    ynh_exec_warn_less bundle exec rake generate_secret_token RAILS_ENV=production
+    ynh_exec_warn_less bundle exec rake db:migrate RAILS_ENV=production
     #ynh_exec_warn_less bundle exec rake redmine:load_default_data RAILS_ENV=production
 popd
 
