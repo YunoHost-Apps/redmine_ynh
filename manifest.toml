@@ -1,3 +1,5 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
 packaging_format = 2
 
 id = "redmine"
@@ -33,10 +35,10 @@ ram.runtime = "50M"
     default = "visitors"
 
 [resources]
-        [resources.sources.main]
-        url = "https://github.com/redmine/redmine/archive/refs/tags/5.0.6.tar.gz"
-        sha256 = "ecdfd7fd377ff3812726a8e0d6d82f6a0fa2be09c271b03472b071f5ed4713f6"
-        autoupdate.strategy = "latest_github_tag"
+    [resources.sources.main]
+    url = "https://github.com/redmine/redmine/archive/refs/tags/5.0.6.tar.gz"
+    sha256 = "ecdfd7fd377ff3812726a8e0d6d82f6a0fa2be09c271b03472b071f5ed4713f6"
+    autoupdate.strategy = "latest_github_tag"
 
     [resources.system_user]
 
@@ -44,6 +46,9 @@ ram.runtime = "50M"
 
     [resources.permissions]
     main.url = "/"
+
+    [resources.ports]
+    main.default = 8095
 
     [resources.apt]
     packages = [
