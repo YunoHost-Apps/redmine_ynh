@@ -11,53 +11,34 @@ source ynh_install_ruby__2
 source /usr/share/yunohost/helpers
 
 #=================================================
-# CHECK VERSION
-#=================================================
-
-upgrade_type=$(ynh_check_app_version_changed)
-
-#=================================================
 # STANDARD UPGRADE STEPS
 #=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Stopping a systemd service..." --weight=1
+ynh_script_progression --message="Stopping $app's systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="stop" --log_path="/var/log/$app/$app.log"
-
-#=================================================
-# DOWNLOAD, CHECK AND UNPACK SOURCE
-#=================================================
-
-if [ "$upgrade_type" == "UPGRADE_APP" ]
-then
-	ynh_script_progression --message="Upgrading source files..." --weight=1
-
-	# Download, check integrity, uncompress and patch the source from app.src
-	ynh_setup_source --dest_dir="$install_dir" --keep="config/database.yml config/configuration.yml"
-fi
-
-mkdir -p "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
-
-chmod 750 "$install_dir"
-chmod 755 "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
-chmod -R o-rwx "$install_dir"
-chown -R $app:www-data "$install_dir"
+ynh_systemd_action --service_name="$app" --action="stop" --log_path="/var/log/$app/$app.log"
 
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-ynh_script_progression --message="Upgrading dependencies..." --weight=1
+ynh_script_progression --message="Upgrading Ruby..." --weight=1
 
 ynh_exec_warn_less ynh_install_ruby --ruby_version=$ruby_version
 
 #=================================================
-# NGINX CONFIGURATION
+# DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
-ynh_script_progression --message="Upgrading NGINX web server configuration..." --weight=1
+ynh_script_progression --message="Upgrading source files..." --weight=1
 
-# Create a dedicated NGINX config
-ynh_add_nginx_config
+# Download, check integrity, uncompress and patch the source from app.src
+ynh_setup_source --dest_dir="$install_dir" --full_replace=1 --keep="config/database.yml config/configuration.yml"
+
+mkdir -p "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
+
+chmod 750 "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 #=================================================
 # SPECIFIC UPGRADE
@@ -66,57 +47,45 @@ ynh_add_nginx_config
 #=================================================
 ynh_script_progression --message="Building app..." --weight=1
 
-pushd $install_dir
-	ynh_use_ruby
-	ynh_gem update --system --no-document
-	ynh_gem install bundler passenger --no-document
-	bundle config set --local without 'development test rmagick'
-	bundle add 'webrick' --version '~> 1.7'
-	bundle install
-	ynh_exec_warn_less bundle exec rake db:migrate RAILS_ENV=production
+pushd "$install_dir"
+    ynh_use_ruby
+    ynh_gem update --system --no-document
+    ynh_gem install bundler passenger --no-document
+    bundle config set --local without 'development test rmagick'
+    bundle add 'webrick' --version '~> 1.7'
+    bundle install
+    ynh_exec_warn_less bundle exec rake db:migrate RAILS_ENV=production
 popd
 
-#Setting up LDAP authentification
-ynh_psql_connect_as $db_user $db_pwd $db_name < $install_dir/config/db-ldap.sql
-rm -f $install_dir/config/db-ldap.sql
+# Setting up LDAP authentification
+ynh_psql_connect_as $db_user $db_pwd $db_name < "$install_dir/config/db-ldap.sql"
+ynh_secure_remove --file="$install_dir/config/db-ldap.sql"
 
 chmod 750 "$install_dir/public"
 chmod -R o-rwx "$install_dir/public"
-chown -R $app:www-data "$install_dir/public"
+chown -R "$app:www-data" "$install_dir/public"
 
 #=================================================
-# SETUP SYSTEMD
+# REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
-ynh_script_progression --message="Upgrading systemd configuration..." --weight=1
+ynh_script_progression --message="Upgrading system configurations related to $app..." --weight=1
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config
 
 # Create a dedicated systemd config
 ynh_add_systemd_config
+yunohost service add "$app" --log="/var/log/$app/$app.log"
 
-#=================================================
-# GENERIC FINALIZATION
-#=================================================
-# SETUP LOGROTATE
-#=================================================
-ynh_script_progression --message="Upgrading logrotate configuration..." --weight=1
-
-mkdir -p "/var/log/$app"
-chown -R $app:$app "/var/log/$app"
 # Use logrotate to manage app-specific logfile(s)
 ynh_use_logrotate --non-append
 
 #=================================================
-# INTEGRATE SERVICE IN YUNOHOST
-#=================================================
-ynh_script_progression --message="Integrating service in YunoHost..." --weight=1
-
-yunohost service add $app --log="/var/log/$app/$app.log"
-
-#=================================================
 # START SYSTEMD SERVICE
 #=================================================
-ynh_script_progression --message="Starting a systemd service..." --weight=1
+ynh_script_progression --message="Starting $app's systemd service..." --weight=1
 
-ynh_systemd_action --service_name=$app --action="start" --log_path="/var/log/$app/$app.log" --line_match="WEBrick::HTTPServer#start"
+ynh_systemd_action --service_name="$app" --action="start" --log_path="/var/log/$app/$app.log" --line_match="WEBrick::HTTPServer#start"
 
 #=================================================
 # END OF SCRIPT
