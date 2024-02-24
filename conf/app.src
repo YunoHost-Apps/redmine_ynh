@@ -1,7 +1,0 @@
-SOURCE_URL=https://github.com/redmine/redmine/archive/refs/tags/5.0.4.tar.gz
-SOURCE_SUM=131ef749ac40af475374659d69dfa53e02a520c6354857fc24dfce5b9443cad3
-SOURCE_SUM_PRG=sha256sum
-SOURCE_FORMAT=tar.gz
-SOURCE_IN_SUBDIR=true
-SOURCE_FILENAME=
-SOURCE_EXTRACT=true

@@ -1,0 +1,82 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+
+packaging_format = 2
+
+id = "redmine"
+name = "Redmine"
+description.en = "Flexible project management web application"
+description.fr = "Gestionnaire de projet flexible sous forme d'application web"
+
+version = "5.0.6~ynh1"
+
+maintainers = [""]
+
+[upstream]
+license = "GPL-2.0"
+website = "https://www.redmine.org"
+code = "https://github.com/redmine/redmine"
+
+[integration]
+yunohost = ">= 11.2"
+architectures = "all"
+multi_instance = true
+ldap = false
+sso = false
+disk = "50M"
+ram.build = "50M"
+ram.runtime = "50M"
+
+[install]
+    [install.domain]
+    type = "domain"
+
+    [install.init_main_permission]
+    type = "group"
+    default = "visitors"
+
+[resources]
+    [resources.sources.main]
+    url = "https://github.com/redmine/redmine/archive/refs/tags/5.0.6.tar.gz"
+    sha256 = "ecdfd7fd377ff3812726a8e0d6d82f6a0fa2be09c271b03472b071f5ed4713f6"
+    autoupdate.strategy = "latest_github_tag"
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.permissions]
+    main.url = "/"
+
+    [resources.ports]
+    main.default = 8095
+
+    [resources.apt]
+    packages = [
+        "postgresql", "libpq-dev",
+
+        # For Ruby
+        "autoconf",
+        "build-essential",
+        "libdb-dev",
+        "libffi-dev",
+        "libgdbm-dev",
+        "libgdbm6",
+        "libgmp-dev",
+        "libjemalloc-dev",
+        "libncurses5-dev",
+        "libsqlite3-dev",
+        "libreadline6-dev",
+        "libssl-dev",
+        "libxml2-dev",
+        "libxslt-dev",
+        "libyaml-dev",
+        "patch",
+        "rustc",
+        "uuid-dev",
+        "zlib1g-dev",
+
+        "openssl",
+    ]
+
+    [resources.database]
+    type = "postgresql"
