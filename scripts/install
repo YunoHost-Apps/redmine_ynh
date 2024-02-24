@@ -44,10 +44,6 @@ ynh_add_config --template="configuration.yml.example" --destination="$install_di
 chmod 400 "$install_dir/config/configuration.yml"
 chown "$app:$app" "$install_dir/config/configuration.yml"
 
-ynh_add_config --template="db-ldap.sql" --destination="$install_dir/config/db-ldap.sql"
-ynh_psql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "$install_dir/config/db-ldap.sql"
-ynh_secure_remove --file="$install_dir/config/db-ldap.sql"
-
 #=================================================
 # BUILD APP
 #=================================================
@@ -60,6 +56,11 @@ pushd "$install_dir"
 	ynh_exec_warn_less bundle exec rake db:migrate RAILS_ENV=production
     #ynh_exec_warn_less bundle exec rake redmine:load_default_data RAILS_ENV=production
 popd
+
+# Setting up LDAP authentification
+ynh_add_config --template="db-ldap.sql" --destination="$install_dir/config/db-ldap.sql"
+ynh_psql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "$install_dir/config/db-ldap.sql"
+ynh_secure_remove --file="$install_dir/config/db-ldap.sql"
 
 #=================================================
 # SYSTEM CONFIGURATION
