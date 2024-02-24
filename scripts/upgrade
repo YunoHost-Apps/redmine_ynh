@@ -53,7 +53,8 @@ pushd "$install_dir"
 popd
 
 # Setting up LDAP authentification
-ynh_psql_connect_as $db_user $db_pwd $db_name < "$install_dir/config/db-ldap.sql"
+ynh_add_config --template="db-ldap.sql" --destination="$install_dir/config/db-ldap.sql"
+ynh_psql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < "$install_dir/config/db-ldap.sql"
 ynh_secure_remove --file="$install_dir/config/db-ldap.sql"
 
 chmod 750 "$install_dir/public"
