@@ -7,7 +7,7 @@ name = "Redmine"
 description.en = "Flexible project management web application"
 description.fr = "Gestionnaire de projet flexible sous forme d'application web"
 
-version = "5.1.1~ynh1"
+version = "5.1.2~ynh1"
 
 maintainers = [""]
 
@@ -36,8 +36,8 @@ ram.runtime = "50M"
 
 [resources]
     [resources.sources.main]
-    url = "https://github.com/redmine/redmine/archive/refs/tags/5.1.1.tar.gz"
-    sha256 = "6e9c7c3beed6ad8a4d6cfa7f57b25a477e7ff787c0f7789485d1cf2b92b23c19"
+    url = "https://github.com/redmine/redmine/archive/refs/tags/5.1.2.tar.gz"
+    sha256 = "beafc7faf7f75f253f0b53f443a64b0ba65a75666cbf6857aae9b1492a2ffbd3"
     autoupdate.strategy = "latest_github_tag"
 
     [resources.system_user]
