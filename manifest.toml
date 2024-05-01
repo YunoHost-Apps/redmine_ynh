@@ -9,7 +9,7 @@ description.fr = "Gestionnaire de projet flexible sous forme d'application web"
 
 version = "5.1.2~ynh1"
 
-maintainers = [""]
+maintainers = []
 
 [upstream]
 license = "GPL-2.0"
