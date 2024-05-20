@@ -17,7 +17,7 @@ website = "https://www.redmine.org"
 code = "https://github.com/redmine/redmine"
 
 [integration]
-yunohost = ">= 11.2"
+yunohost = ">= 11.2.12"
 architectures = "all"
 multi_instance = true
 ldap = false
