@@ -5,7 +5,7 @@
 
 # YunoHost 上的 Redmine
 
-[![集成程度](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![工作状态](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)
+[![集成程度](https://dash.yunohost.org/integration/redmine.svg)](https://ci-apps.yunohost.org/ci/apps/redmine/) ![工作状态](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![维护状态](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)
 
 [![使用 YunoHost 安装 Redmine](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=redmine)
 
@@ -19,7 +19,7 @@
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
 
-**分发版本：** 5.1.3~ynh1
+**分发版本：** 5.1.4~ynh1
 
 ## 截图
 

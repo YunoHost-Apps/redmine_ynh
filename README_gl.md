@@ -5,7 +5,7 @@ NON debe editarse manualmente.
 
 # Redmine para YunoHost
 
-[![Nivel de integración](https://dash.yunohost.org/integration/redmine.svg)](https://dash.yunohost.org/appci/app/redmine) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)
+[![Nivel de integración](https://dash.yunohost.org/integration/redmine.svg)](https://ci-apps.yunohost.org/ci/apps/redmine/) ![Estado de funcionamento](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Estado de mantemento](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)
 
 [![Instalar Redmine con YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=redmine)
 
@@ -19,7 +19,7 @@ NON debe editarse manualmente.
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
 
-**Versión proporcionada:** 5.1.3~ynh1
+**Versión proporcionada:** 5.1.4~ynh1
 
 ## Capturas de pantalla
 
