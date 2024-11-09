@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
@@ -21,8 +20,6 @@ ynh_restore "$install_dir"
 ynh_safe_rm "$install_dir/tmp"
 mkdir -p "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
 
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chmod -R o-rwx "$install_dir"
-#REMOVEME? Assuming the install dir is setup using ynh_setup_source, the proper chmod/chowns are now already applied and it shouldn't be necessary to tweak perms | chown -R "$app:www-data" "$install_dir"
 #=================================================
 # RESTORE THE POSTGRESQL DATABASE
 #=================================================
@@ -50,6 +47,7 @@ ynh_restore "/etc/nginx/conf.d/$domain.d/$app.conf"
 
 ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable "$app.service" --quiet
+
 yunohost service add "$app" --log="/var/log/$app/$app.log"
 
 ynh_restore "/etc/logrotate.d/$app"
