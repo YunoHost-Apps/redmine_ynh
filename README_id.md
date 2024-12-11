@@ -5,7 +5,9 @@ Ini TIDAK boleh diedit dengan tangan.
 
 # Redmine untuk YunoHost
 
-[![Tingkat integrasi](https://dash.yunohost.org/integration/redmine.svg)](https://ci-apps.yunohost.org/ci/apps/redmine/) ![Status kerja](https://ci-apps.yunohost.org/ci/badges/redmine.status.svg) ![Status pemeliharaan](https://ci-apps.yunohost.org/ci/badges/redmine.maintain.svg)
+[![Tingkat integrasi](https://apps.yunohost.org/badge/integration/redmine)](https://ci-apps.yunohost.org/ci/apps/redmine/)
+![Status kerja](https://apps.yunohost.org/badge/state/redmine)
+![Status pemeliharaan](https://apps.yunohost.org/badge/maintained/redmine)
 
 [![Pasang Redmine dengan YunoHost](https://install-app.yunohost.org/install-with-yunohost.svg)](https://install-app.yunohost.org/?app=redmine)
 
@@ -19,7 +21,7 @@ Ini TIDAK boleh diedit dengan tangan.
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
 
-**Versi terkirim:** 6.0.1~ynh1
+**Versi terkirim:** 6.0.2~ynh1
 
 ## Tangkapan Layar
 
