@@ -4,10 +4,10 @@ packaging_format = 2
 
 id = "redmine"
 name = "Redmine"
-description.en = "Flexible project management web application"
-description.fr = "Gestionnaire de projet flexible sous forme d'application web"
+description.en = "Flexible project management Web application"
+description.fr = "Gestionnaire de projet flexible sous forme d'application Web"
 
-version = "6.0.3~ynh1"
+version = "6.0.3~ynh2"
 
 maintainers = []
 
@@ -17,11 +17,15 @@ website = "https://www.redmine.org"
 code = "https://github.com/redmine/redmine"
 
 [integration]
-yunohost = ">= 11.2.12"
+yunohost = ">= 12.0.9"
+helpers_version = "2.1"
 architectures = "all"
 multi_instance = true
+
 ldap = false
+
 sso = false
+
 disk = "50M"
 ram.build = "50M"
 ram.runtime = "50M"
@@ -53,7 +57,6 @@ ram.runtime = "50M"
     [resources.apt]
     packages = [
         "postgresql", "libpq-dev",
-
         # For Ruby
         "autoconf",
         "build-essential",
@@ -74,7 +77,6 @@ ram.runtime = "50M"
         "rustc",
         "uuid-dev",
         "zlib1g-dev",
-
         "openssl",
     ]
 

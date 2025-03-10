@@ -21,7 +21,7 @@ No se debe editar a mano.
 Redmine is a flexible project management web application written using Ruby on Rails framework.
 
 
-**Versión actual:** 6.0.3~ynh1
+**Versión actual:** 6.0.3~ynh2
 
 ## Capturas
 
