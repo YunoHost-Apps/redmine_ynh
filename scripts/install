@@ -19,6 +19,10 @@ ynh_setup_source --dest_dir="$install_dir"
 
 mkdir -p "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
 
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:$app" "$install_dir"
+
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
@@ -27,10 +31,6 @@ ynh_script_progression "Adding $app's configuration file..."
 ynh_config_add --template="database.example.yml" --destination="$install_dir/config/database.yml"
 
 ynh_config_add --template="configuration.yml.example" --destination="$install_dir/config/configuration.yml"
-
-chmod 750 "$install_dir/public"
-chmod -R o-rwx "$install_dir/public"
-chown -R "$app:$app" "$install_dir/public"
 
 #=================================================
 # BUILD APP
