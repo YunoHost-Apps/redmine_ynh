@@ -55,7 +55,6 @@ ram.runtime = "50M"
     [resources.apt]
     packages = [
         "postgresql", "libpq-dev",
-
         # For Ruby
         "autoconf",
         "build-essential",
@@ -76,7 +75,6 @@ ram.runtime = "50M"
         "rustc",
         "uuid-dev",
         "zlib1g-dev",
-
         "openssl",
     ]
 
