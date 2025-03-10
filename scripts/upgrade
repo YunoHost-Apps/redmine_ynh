@@ -34,6 +34,7 @@ chmod 750 "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_d
 ynh_script_progression "Building $app..."
 
 _redmine_ruby_install
+
 pushd "$install_dir"
     ynh_hide_warnings bundle exec rake db:migrate RAILS_ENV=production
 popd
@@ -43,9 +44,14 @@ ynh_config_add --template="db-ldap.sql" --destination="$install_dir/config/db-ld
 ynh_psql_db_shell < "$install_dir/config/db-ldap.sql"
 ynh_safe_rm "$install_dir/config/db-ldap.sql"
 
-chmod 750 "$install_dir/public"
-chmod -R o-rwx "$install_dir/public"
-chown -R "$app:www-data" "$install_dir/public"
+#=================================================
+# SET PERMISSION
+#=================================================
+ynh_script_progression "Set permissions for $app..."
+
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:$app" "$install_dir"
 
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS

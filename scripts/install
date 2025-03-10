@@ -19,10 +19,6 @@ ynh_setup_source --dest_dir="$install_dir"
 
 mkdir -p "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
 
-chmod 750 "$install_dir"
-chmod -R o-rwx "$install_dir"
-chown -R "$app:$app" "$install_dir"
-
 #=================================================
 # ADD A CONFIGURATION
 #=================================================
@@ -35,7 +31,7 @@ ynh_config_add --template="configuration.yml.example" --destination="$install_di
 #=================================================
 # BUILD APP
 #=================================================
-ynh_script_progression "Building app..."
+ynh_script_progression "Building $app..."
 
 _redmine_ruby_install
 
@@ -62,6 +58,15 @@ ynh_config_add_systemd
 yunohost service add "$app" --log="/var/log/$app/$app.log"
 
 ynh_config_add_logrotate
+
+#=================================================
+# SET PERMISSION
+#=================================================
+ynh_script_progression "Set permissions for $app..."
+
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:$app" "$install_dir"
 
 #=================================================
 # START SYSTEMD SERVICE

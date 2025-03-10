@@ -34,10 +34,6 @@ ynh_script_progression "Building app..."
 
 _redmine_ruby_install
 
-chmod 750 "$install_dir/public"
-chmod -R o-rwx "$install_dir/public"
-chown -R "$app:$app" "$install_dir/public"
-
 #=================================================
 # RESTORE SYSTEM CONFIGURATIONS
 #=================================================
@@ -57,6 +53,15 @@ ynh_restore "/etc/logrotate.d/$app"
 #=================================================
 
 ynh_restore "/var/log/$app/"
+
+#=================================================
+# SET PERMISSION
+#=================================================
+ynh_script_progression "Set permissions for $app..."
+
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:$app" "$install_dir"
 
 #=================================================
 # RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
