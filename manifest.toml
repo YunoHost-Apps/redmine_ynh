@@ -7,7 +7,7 @@ name = "Redmine"
 description.en = "Flexible project management Web application"
 description.fr = "Gestionnaire de projet flexible sous forme d'application Web"
 
-version = "6.0.3~ynh1"
+version = "6.0.3~ynh2"
 
 maintainers = []
 
