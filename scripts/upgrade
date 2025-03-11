@@ -26,7 +26,7 @@ ynh_setup_source --dest_dir="$install_dir" --full_replace --keep="files config/d
 
 mkdir -p "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
 
-chmod 750 "$install_dir/files" "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
+chmod 750 "$install_dir/log" "$install_dir/tmp" "$install_dir/public/plugin_assets"
 
 #=================================================
 # BUILD APP
