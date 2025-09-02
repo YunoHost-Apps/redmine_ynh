@@ -6,9 +6,9 @@ source /usr/share/yunohost/helpers
 #=================================================
 # INSTALL DEPENDENCIES
 #=================================================
-ynh_script_progression "Installing Ruby..."
+#REMOVEME? ynh_script_progression "Installing Ruby..."
 
-ynh_ruby_install
+#REMOVEME? ynh_ruby_install
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE

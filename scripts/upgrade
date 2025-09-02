@@ -13,9 +13,9 @@ ynh_systemctl --service="$app" --action="stop"
 #=================================================
 # UPGRADE DEPENDENCIES
 #=================================================
-ynh_script_progression "Upgrading Ruby..."
+#REMOVEME? ynh_script_progression "Upgrading Ruby..."
 
-ynh_ruby_install
+#REMOVEME? ynh_ruby_install
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
