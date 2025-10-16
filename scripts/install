@@ -4,13 +4,6 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# INSTALL DEPENDENCIES
-#=================================================
-#REMOVEME? ynh_script_progression "Installing Ruby..."
-
-#REMOVEME? ynh_ruby_install
-
-#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Setting up source files..."
