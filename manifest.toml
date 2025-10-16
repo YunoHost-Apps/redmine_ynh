@@ -84,4 +84,4 @@ ram.runtime = "50M"
     type = "postgresql"
 
     [resources.ruby]
-    version = "3.1"
+    version = "3.4"
