@@ -4,8 +4,6 @@
 # COMMON VARIABLES AND CUSTOM HELPERS
 #=================================================
 
-ruby_version="3.1"
-
 _redmine_ruby_install() {
     pushd "$install_dir"
         gem update --system --no-document
