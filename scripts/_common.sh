@@ -6,7 +6,6 @@
 
 _redmine_ruby_install() {
     pushd "$install_dir"
-        gem update --system --no-document
         gem install bundler passenger --no-document
         bundle config set --local without 'development test rmagick'
         bundle add 'webrick' --version '~> 1.7'
