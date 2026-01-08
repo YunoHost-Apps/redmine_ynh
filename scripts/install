@@ -23,7 +23,6 @@ ynh_config_add --template="configuration.yml.example" --destination="$install_di
 
 # fix : You can add ostruct to your Gemfile or gemspec to silence this warning. 
 echo "gem 'ostruct'" > "$install_dir/Gemfile"
-echo "gem 'webrick'" > "$install_dir/Gemfile"
 
 #=================================================
 # BUILD APP
@@ -70,7 +69,7 @@ chown -R "$app:$app" "$install_dir"
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service="$app" --action="start" --wait_until="WEBrick::HTTPServer#start"
+ynh_systemctl --service="$app" --action="start" --wait_until="WEBrick::HTTPServer#start" --timeout=1800
 
 #=================================================
 # END OF SCRIPT
