@@ -23,7 +23,7 @@ ynh_config_add --template="configuration.yml.example" --destination="$install_di
 
 # fix : You can add ostruct to your Gemfile or gemspec to silence this warning. 
 echo "gem 'ostruct'" > "$install_dir/Gemfile"
-echo "gem 'webrick', '(~> 1.7)'" > "$install_dir/Gemfile"
+echo "gem 'webrick'" > "$install_dir/Gemfile"
 
 #=================================================
 # BUILD APP
