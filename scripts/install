@@ -29,7 +29,6 @@ ynh_script_progression "Adding extra dependencies..."
 # We should add extra gems to the Gemfile.local file according to the Redmine installation docs.
 cat <<EOF > "$install_dir/Gemfile.local"
 gem 'ostruct'
-gem 'puma'
 EOF
 
 #=================================================
