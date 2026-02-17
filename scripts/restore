@@ -61,7 +61,7 @@ chown -R "$app:$app" "$install_dir"
 #=================================================
 ynh_script_progression "Reloading NGINX web server and $app's service..."
 
-ynh_systemctl --service="$app" --action="start" --wait_until="WEBrick::HTTPServer#start"
+ynh_systemctl --service="$app" --action="start" --wait_until="Listening on http" --timeout=300
 
 ynh_systemctl --service=nginx --action=reload
 
