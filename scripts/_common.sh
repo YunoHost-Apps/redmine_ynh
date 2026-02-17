@@ -6,10 +6,9 @@
 
 _redmine_ruby_install() {
     pushd "$install_dir"
-        gem update --system --no-document
+        gem update --system 3.4.22 --no-document
         gem install bundler passenger --no-document
         bundle config set --local without 'development test rmagick'
-        bundle add 'webrick' --version '~> 1.7'
         bundle install
     popd
 }
